@@ -1,0 +1,16 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.iamvoragun</groupId>
+    <artifactId>review</artifactId>
+    <version>beginner</version>
+    
+    <properties>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+    </properties>
+    
+    <build>
+        <sourceDirectory>code</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+    </build>
+</project>
