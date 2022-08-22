@@ -1,8 +1,13 @@
 class Start {
     public static void main(String[] data) {
         int[] a = { 8, 5, 4, 2, 7, 1, 9, 3 };
+        
+        Element list = createList(a);
+        showList(list);
     }
     
+    
+    // create linked list
     static Element createList(int ... data) {
         Element head = null;
         Element tail = null;
@@ -17,9 +22,15 @@ class Start {
                 tail.next.value = data[i];
                 tail = tail.next;
             }
-        }
-        
+        }       
         return head;
+    }
+    
+    // print all value in element
+    static void showList(Element e) {
+        if(e == null) return;
+        System.out.println(e.value);
+        showList(e.next);
     }
 }
 
