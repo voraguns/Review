@@ -4,7 +4,9 @@ class Start {
         
         Element list = createList(a);
         showList(list);
-        countNode(list);
+        System.out.println();
+        System.out.println("The number of node is " + countNode(list));
+        System.out.println("Total sum of element is " + findSum(list));
     }
     
     
@@ -30,7 +32,7 @@ class Start {
     // print all value in element
     static void showList(Element e) {
         if(e == null) return;
-        System.out.println(e.value);
+        System.out.print(" " + e.value);
         showList(e.next);
     }
     
@@ -38,6 +40,15 @@ class Start {
         if (e == null) return 0;
         return 1 + countNode(e.next);
     }
+    
+    static int findSum(Element e) {
+        int result = 0;
+        Element current = e;
+        for (Element c = e; c != null; c = c.next) {
+            result += c.value;
+        }
+        return result;
+    } 
 }
 
 class Element {
