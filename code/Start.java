@@ -7,6 +7,7 @@ class Start {
         System.out.println();
         System.out.println("The number of node is " + countNode(list));
         System.out.println("Total sum of element is " + findSum(list));
+        System.out.println("The maximum value in linked list is " + findMax(list).value);
     }
     
     
@@ -48,7 +49,17 @@ class Start {
             result += c.value;
         }
         return result;
-    } 
+    }
+    
+    static Element findMax(Element e) {
+        Element result = e;
+        for (Element c = e; c != null; c = c.next) {
+            if(result.value < c.value) {
+                result = c;
+            }
+        }
+        return result;
+    }
 }
 
 class Element {
