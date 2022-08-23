@@ -9,11 +9,8 @@ class Start {
         System.out.println("The number of node is " + countNode(list));
         System.out.println("Total sum of element is " + findSum(list));
         System.out.println("The maximum value in linked list is " + findMax(list).value);
-//        var result = reverse(list);
-//        for (Element r = result; result != null; r.next) {
-//            System.out.println(result.value);
-//        }
-        
+ 
+        showReverseList(list);
     }
     
     
@@ -60,6 +57,13 @@ class Start {
         if(e == null) return;
         System.out.print(" " + e.value);
         showList(e.next);
+    }
+    
+    // print reverse all value in element
+    static void showReverseList(Element e) {
+        if (e == null) return;
+        showReverseList(e.next);
+        System.out.print(" " + e.value);
     }
     
     static int countNode(Element e) {
