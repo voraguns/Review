@@ -2,12 +2,18 @@ class Start {
     public static void main(String[] data) {
         int[] a = { 8, 5, 4, 2, 7, 1, 9, 3 };
         
-        Element list = createList(a);
+        Element list = create(a);
         showList(list);
+        
         System.out.println();
         System.out.println("The number of node is " + countNode(list));
         System.out.println("Total sum of element is " + findSum(list));
         System.out.println("The maximum value in linked list is " + findMax(list).value);
+//        var result = reverse(list);
+//        for (Element r = result; result != null; r.next) {
+//            System.out.println(result.value);
+//        }
+        
     }
     
     
@@ -27,6 +33,25 @@ class Start {
                 tail = tail.next;
             }
         }       
+        return head;
+    }
+    
+    static Element create(int ... data) {
+        Element head = null;
+        Element tail = null;
+        
+        for (int i = 0; i < data.length; i++) {
+            Element current = new Element();
+            current.value = data[i];
+            if(head == null) {
+                head = current;
+                tail = current;
+            } else {
+                tail.next = current;
+                tail = current;
+            }
+        }
+        
         return head;
     }
     
@@ -58,6 +83,16 @@ class Start {
                 result = c;
             }
         }
+        return result;
+    }
+    
+    static Element reverse(Element first) {
+        if (first == null) return null;           // No element
+        if (first.next == null) return first;     // One element
+        Element second = first.next;
+        first.next = null;                        // Cut
+        Element result = reverse(second);         // Link again
+        second.next = result;
         return result;
     }
 }
