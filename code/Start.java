@@ -4,6 +4,7 @@ class Start {
         
         Element list = createList(a);
         showList(list);
+        countNode(list);
     }
     
     
@@ -31,6 +32,11 @@ class Start {
         if(e == null) return;
         System.out.println(e.value);
         showList(e.next);
+    }
+    
+    static int countNode(Element e) {
+        if (e == null) return 0;
+        return 1 + countNode(e.next);
     }
 }
 
