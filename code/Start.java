@@ -11,11 +11,11 @@ class Start {
         System.out.println("The maximum value in linked list is " + findMax(list).value);
         System.out.println("The minimum value in linked list is " + findMin(list).value);
 //        reverse(list);
-//        Element last = reverse(list);
+        Element last = reverse(list);
 //        showList(last);
-//        for(Element r = last; r != null; r = r.next) {
-//            System.out.println(" " + r.value);
-//        }
+        for(Element r = last; r != null; r = r.next) {
+            System.out.println(" " + r.value);
+        }
         
     }
     
@@ -111,8 +111,9 @@ class Start {
         if (first.next == null) return first;     // One element
         Element second = first.next;
         first.next = null;                        // Cut
-        Element result = reverse(second);         // Link again
-        second.next = result;
+        Element result = reverse(second);  
+//        System.out.println(second.value);    // Link again
+        second.next = first;
         return result;
     }
 }
