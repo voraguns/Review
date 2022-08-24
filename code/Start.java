@@ -9,8 +9,14 @@ class Start {
         System.out.println("The number of node is " + countNode(list));
         System.out.println("Total sum of element is " + findSum(list));
         System.out.println("The maximum value in linked list is " + findMax(list).value);
- 
-        showReverseList(list);
+        System.out.println("The minimum value in linked list is " + findMin(list).value);
+//        reverse(list);
+//        Element last = reverse(list);
+//        showList(last);
+//        for(Element r = last; r != null; r = r.next) {
+//            System.out.println(" " + r.value);
+//        }
+        
     }
     
     
@@ -89,6 +95,16 @@ class Start {
         }
         return result;
     }
+    
+    static Element findMin(Element e) {
+        Element result = e;
+        for(Element c = e; c != null; c = c.next) {
+            if (result.value > c.value) {
+                result = c;
+            }
+        }
+        return result;
+    } 
     
     static Element reverse(Element first) {
         if (first == null) return null;           // No element
