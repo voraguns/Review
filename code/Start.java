@@ -1,52 +1,39 @@
 class Start {
     public static void main(String[] data) {
-        int[] a = { 8, 5, 4, 2, 7, 1, 9, 3 };
-        
-        Element list = create(a);
-        showList(list);
-        
-        System.out.println();
-        System.out.println("The number of node is " + countNode(list));
-        System.out.println("Total sum of element is " + findSum(list));
-        System.out.println("The maximum value in linked list is " + findMax(list).value);
-        System.out.println("The minimum value in linked list is " + findMin(list).value);
-//        reverse(list);
-        Element last = reverse(list);
-//        showList(last);
-        for(Element r = last; r != null; r = r.next) {
-            System.out.println(" " + r.value);
+        int[] value =  { 2, 5, 7, 1, 4, 9, 6 };
+        System.out.println("This is data in array : ");
+        for (int i = 0; i < value.length; i++) {            
+            System.out.print(" " + value[i]);
         }
         
+        System.out.println();    
+        Element chain = createLinkedlist(value);
+        System.out.println("Create Linked list : ");
+        printLinkedlist(chain);
+        
+        System.out.println();
+        System.out.println("Reverse Linked List :");
+        showReverseLinkedlist(chain);
+        
+        System.out.println();
+        System.out.println("Maximum value in data is : " + maxValue(chain).value);
+        System.out.println("Minimum value in data is : " + minValue(chain).value);
+        System.out.println("Total value in data is : " + sumValue(chain));
     }
     
-    
-    // create linked list
-    static Element createList(int ... data) {
-        Element head = null;
-        Element tail = null;
-        
-        for(int i = 0; i < data.length; i++){
-            if(tail == null) {
-                tail = new Element();
-                tail.value = data[i];
-                head = tail;
-            } else {
-                tail.next = new Element();
-                tail.next.value = data[i];
-                tail = tail.next;
-            }
-        }       
-        return head;
+    static void printLinkedlist(Element e) {
+        if (e == null) return;
+        printLinkedlist(e.next);
+        System.out.print(" " + e.value);    
     }
     
-    static Element create(int ... data) {
+    static Element createLinkedlist(int ... data) {
         Element head = null;
         Element tail = null;
-        
-        for (int i = 0; i < data.length; i++) {
+        for (int i = 0; i < data.length; i++){
             Element current = new Element();
             current.value = data[i];
-            if(head == null) {
+            if (head == null) {
                 head = current;
                 tail = current;
             } else {
@@ -54,68 +41,43 @@ class Start {
                 tail = current;
             }
         }
-        
         return head;
     }
     
-    // print all value in element
-    static void showList(Element e) {
-        if(e == null) return;
-        System.out.print(" " + e.value);
-        showList(e.next);
+    static Element maxValue(Element e) {
+        Element result = e;
+        for (Element current = e; current != null; current = current.next) {
+            if (result.value < current.value) {
+                result = current;
+            }
+        }
+        return result;
     }
     
-    // print reverse all value in element
-    static void showReverseList(Element e) {
-        if (e == null) return;
-        showReverseList(e.next);
-        System.out.print(" " + e.value);
+    static Element minValue(Element e) {
+        Element result = e;
+        for (Element current = e; current != null; current = current.next) {
+            if (result.value > current.value) {
+                result = current;
+            }
+        }
+        return result;
     }
     
-    static int countNode(Element e) {
-        if (e == null) return 0;
-        return 1 + countNode(e.next);
-    }
-    
-    static int findSum(Element e) {
+    static int sumValue(Element e) {
         int result = 0;
-        Element current = e;
-        for (Element c = e; c != null; c = c.next) {
-            result += c.value;
+        for (Element current = e; current != null; current = current.next) {
+            result += current.value;
         }
         return result;
     }
     
-    static Element findMax(Element e) {
-        Element result = e;
-        for (Element c = e; c != null; c = c.next) {
-            if(result.value < c.value) {
-                result = c;
-            }
-        }
-        return result;
+    static void showReverseLinkedlist(Element e) {
+        if (e == null) return;
+        System.out.print(" " + e.value);
+        showReverseLinkedlist(e.next);
     }
     
-    static Element findMin(Element e) {
-        Element result = e;
-        for(Element c = e; c != null; c = c.next) {
-            if (result.value > c.value) {
-                result = c;
-            }
-        }
-        return result;
-    } 
-    
-    static Element reverse(Element first) {
-        if (first == null) return null;           // No element
-        if (first.next == null) return first;     // One element
-        Element second = first.next;
-        first.next = null;                        // Cut
-        Element result = reverse(second);  
-//        System.out.println(second.value);    // Link again
-        second.next = first;
-        return result;
-    }
 }
 
 class Element {
