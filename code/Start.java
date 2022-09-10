@@ -1,87 +1,66 @@
 class Start {
-    public static void main(String[] data) {
-        int[] value =  { 2, 5, 7, 1, 4, 9, 6 };
-        System.out.println("This is data in array : ");
-        for (int i = 0; i < value.length; i++) {            
-            System.out.print(" " + value[i]);
-        }
-        
-        System.out.println();    
-        Element chain = createLinkedlist(value);
-        System.out.println("Create Linked list : ");
-        printLinkedlist(chain);
-        
-        System.out.println();
-        System.out.println("Reverse Linked List :");
-        showReverseLinkedlist(chain);
-        
-        System.out.println();
-        System.out.println("Maximum value in data is : " + maxValue(chain).value);
-        System.out.println("Minimum value in data is : " + minValue(chain).value);
-        System.out.println("Total value in data is : " + sumValue(chain));
-    }
-    
-    static void printLinkedlist(Element e) {
-        if (e == null) return;
-        printLinkedlist(e.next);
-        System.out.print(" " + e.value);    
-    }
-    
-    static Element createLinkedlist(int ... data) {
-        Element head = null;
-        Element tail = null;
-        for (int i = 0; i < data.length; i++){
-            Element current = new Element();
-            current.value = data[i];
-            if (head == null) {
-                head = current;
-                tail = current;
-            } else {
-                tail.next = current;
-                tail = current;
-            }
-        }
-        return head;
-    }
-    
-    static Element maxValue(Element e) {
-        Element result = e;
-        for (Element current = e; current != null; current = current.next) {
-            if (result.value < current.value) {
-                result = current;
-            }
-        }
-        return result;
-    }
-    
-    static Element minValue(Element e) {
-        Element result = e;
-        for (Element current = e; current != null; current = current.next) {
-            if (result.value > current.value) {
-                result = current;
-            }
-        }
-        return result;
-    }
-    
-    static int sumValue(Element e) {
-        int result = 0;
-        for (Element current = e; current != null; current = current.next) {
-            result += current.value;
-        }
-        return result;
-    }
-    
-    static void showReverseLinkedlist(Element e) {
-        if (e == null) return;
-        System.out.print(" " + e.value);
-        showReverseLinkedlist(e.next);
-    }
-    
+	public static void main(String[] data) {
+		String[] h1 = new String[3];
+		h1[0] = "A";
+		h1[1] = "10";
+		h1[2] = "A";
+		Engine e = new Engine();
+		e.prepare(h1);
+		e.printAll(h1, 0, 0);
+		int best = 0;
+		for (int i = 0; i < e.possibles.length; i++) {
+			System.out.println(e.possibles[i]);
+			if (e.possibles[i] <= 21 && e.possibles[i] > best) {
+				best = e.possibles[i];
+			}
+		}
+		if (best == 0) {
+			int minimum = e.possibles[0];
+			for (int i = 0; i < e.possibles.length; i++) {
+				if (e.possibles[i] < minimum) {
+					minimum = e.possibles[i];
+				}
+			}
+			best = minimum;
+		}
+		System.out.println("The best is " + best);
+	}
 }
+class Engine {
+	int[] possibles;    // default value is null
+	int current;        // default value is 0
+	void prepare(String[] data) {
+		int total = 1;  // no default value
+		for (int i = 0; i < data.length; i++) {
+			if (data[i].equals("A")) {
+				total = total * 2;
+			}
+		}
+		possibles = new int[total];
+	}
 
-class Element {
-    String name;
-    int value;
-    Element next;
+	void printAll(String[] data, int level, int sum) {
+		if (level == data.length) {
+			// System.out.println(sum);
+			possibles[current] = sum;
+			current++;
+			return;
+		}
+		if (data[level].equals("A")) {
+			printAll(data, level + 1, sum + 1);
+			printAll(data, level + 1, sum + 11);
+		}
+		if (data[level].equals("2"))  printAll(data, level + 1, sum + 2);
+		if (data[level].equals("3"))  printAll(data, level + 1, sum + 3);
+		if (data[level].equals("4"))  printAll(data, level + 1, sum + 4);
+		if (data[level].equals("5"))  printAll(data, level + 1, sum + 5);
+		if (data[level].equals("6"))  printAll(data, level + 1, sum + 6);
+		if (data[level].equals("7"))  printAll(data, level + 1, sum + 7);
+		if (data[level].equals("8"))  printAll(data, level + 1, sum + 8);
+		if (data[level].equals("9"))  printAll(data, level + 1, sum + 9);
+		if (data[level].equals("10")) printAll(data, level + 1, sum + 10);
+		if (data[level].equals("J"))  printAll(data, level + 1, sum + 10);
+		if (data[level].equals("Q"))  printAll(data, level + 1, sum + 10);
+		if (data[level].equals("K"))  printAll(data, level + 1, sum + 10);
+	}
 }
